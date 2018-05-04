@@ -5,17 +5,17 @@ ufw app list #ver lista de firewall
 ufw allow 'Apache' #Permite apache2 el firewall
 ufw enable #activa firewall
 ufw status # ver actual firewall
-systemctl status apache2 | echo q#ver estado apache2
+systemctl status apache2 | echo q #ver estado apache2
 hostname -I # ver mi ip
 
 echo "#Posibles comandos con systemctl "
-echo " Parar/Arrancar/Reniciar/Recargar/Deshabilitar/Habilitar"
-echo " #sudo systemctl stop apache2"
-echo " #sudo systemctl start apache2"
-echo " #sudo systemctl restart apache2"
-echo " #sudo systemctl reload apache2"
-echo " #sudo systemctl disable apache2"
-echo " #sudo systemctl enable apache2"
+echo "Parar/Arrancar/Reniciar/Recargar/Deshabilitar/Habilitar"
+echo "#sudo systemctl stop apache2"
+echo "#sudo systemctl start apache2"
+echo "#sudo systemctl restart apache2"
+echo "#sudo systemctl reload apache2"
+echo "#sudo systemctl disable apache2"
+echo "#sudo systemctl enable apache2"
 
 echo -e "Directorio? "
 read direct
