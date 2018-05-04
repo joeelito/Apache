@@ -1,0 +1,35 @@
+#!/bin/bash
+apt update
+apt install apache2 -y 
+ufw app list #ver lista de firewall
+ufw allow 'Apache' #Permite apache2 el firewall
+ufw enable #activa firewall
+ufw status # ver actual firewall
+systemctl status apache2 | echo q #ver estado apache2
+hostname -I # ver mi ip
+
+echo #Posibles comandos con systemctl 
+echo Parar/Arrancar/Reniciar/Recargar/Deshabilitar/Habilitar
+echo #sudo systemctl stop apache2
+echo #sudo systemctl start apache2
+echo #sudo systemctl restart apache2
+echo #sudo systemctl reload apache2
+echo #sudo systemctl disable apache2
+echo #sudo systemctl enable apache2
+
+echo -e "Directorio? "
+read direct
+echo $direct
+mkdir -p /var/www/$direct/html # crear carpeta para paginas
+chown -R $USER:$USER /var/www/$direct/html
+chmod -R 755 /var/www/$direct
+echo -e "<html>\n<head>\n<title>Welcome to Example.com!</title>\n</head>\n<body>\n<h1>Success!  The example.com server block is working!</h1>\n</body>\n</html>" > /var/www/$direct/html/index.html
+echo -e "<html>\n<head>\n<title>Welcome to Example.com!</title>\n</head>\n<body>\n<h1>Success!  The example.com server block is working!</h1>\n</body>\n</html>" > /var/www/$direct/html/index.html
+echo -e "<VirtualHost *:80>\nServerAdmin admin@$direct\nServerName $direct\nServerAlias www.$direct\nDocumentRoot /var/www/$direct/html\nErrorLog ${APACHE_LOG_DIR}/error.log\nCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>">/etc/apache2/sites-available/$direct.conf
+
+a2ensite $direct.conf
+a2dissite 000-default.conf
+apache2ctl configtest
+#Output
+echo -e "Respuesta del configtest -- Syntax OK"
+systemctl restart apache2
